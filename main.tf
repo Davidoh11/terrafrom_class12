@@ -1,5 +1,10 @@
 provider "aws" {
-  region = "us-east-1" # Update with your desired region
+  region = "us-east-1"
+}
+
+
+locals {
+  key_name        = "~/Downloads/1005.pem"
 }
 
 resource "aws_security_group" "ec2_security_group" {
@@ -33,7 +38,7 @@ resource "aws_security_group" "ec2_security_group" {
 resource "aws_instance" "ec2_instance" {
   ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro"
-  key_name      =  1005.pem
+  key_name       = local.key_name
 
   provisioner "remote-exec" {
     inline = [
